@@ -89,7 +89,7 @@ function HeaderRightContent() {
         onClick={() => navigate("/shop/search")}
         variant="outline"
         size="icon"
-        className="relative"
+        className="relative bg-black"
       >
         <Search className="w-6 h-6" />
         <span className="sr-only">Search</span>
@@ -100,9 +100,9 @@ function HeaderRightContent() {
         onClick={() => navigate("/wishlist")}
         variant="outline"
         size="icon"
-        className="relative"
+        className="relative bg-black"
       >
-        <Heart className="w-6 h-6" />
+        <Heart className="w-6 h-6 " />
         <span className="absolute top-[-5px] right-[2px] font-bold text-sm">
           {wishlist?.length || 0}
         </span>
@@ -115,13 +115,13 @@ function HeaderRightContent() {
           onClick={() => setOpenCartSheet(true)}
           variant="outline"
           size="icon"
-          className="relative"
+          className="relative  bg-black"
         >
-          <ShoppingCart className="w-6 h-6" />
+          <ShoppingCart className="w-6 h-6 " />
           <span className="absolute top-[-5px] right-[2px] font-bold text-sm">
             {cartItems?.items?.length || 0}
           </span>
-          <span className="sr-only">User cart</span>
+          <span className="sr-only ">User cart</span>
         </Button>
         <UserCartWrapper
           setOpenCartSheet={setOpenCartSheet}
@@ -136,7 +136,7 @@ function HeaderRightContent() {
       {/* Avatar + Dropdown */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="bg-black w-10 h-10">
+          <Avatar className="bg-white w-10 h-10">
             {user?.avatar ? (
               <img
                 src={`/avatars/${user.avatar}.png`}
@@ -170,8 +170,8 @@ function HeaderRightContent() {
 
 function ShoppingHeader() {
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background">
-      <div className="relative flex h-16 items-center justify-between px-4 md:px-6">
+    <header className="sticky top-0 z-40 w-full border-b bg-black ">
+      <div className="relative flex h-16 items-center text-white justify-between px-4 md:px-6 ">
         <Link
           to="/shop/home"
           className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-2"
@@ -187,21 +187,21 @@ function ShoppingHeader() {
         </Link>
 
         {/* Mobile Menu Button */}
-        <Sheet>
+        <Sheet className="lg:hidden bg-black">
           <SheetTrigger asChild>
             <Button variant="outline" size="icon" className="lg:hidden">
               <Menu className="h-6 w-6" />
               <span className="sr-only">Toggle header menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-full max-w-xs">
+          <SheetContent side="left" className="w-full  max-w-xs ">
             <MenuItems />
             <HeaderRightContent />
           </SheetContent>
         </Sheet>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:block">
+        <div className=" hidden lg:block">
           <MenuItems />
         </div>
 

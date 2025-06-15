@@ -24,7 +24,7 @@ const initialFormData = {
   title: "",
   description: "",
   category: "",
-  brand: "",
+  theme: "",
   price: "",
   salePrice: "",
   totalStock: "",
@@ -44,12 +44,25 @@ function AdminProducts() {
   const dispatch = useDispatch();
   const { toast } = useToast();
 
-    console.log("Is form valid?", isFormValid());
-
   function onSubmit(event) {
     event.preventDefault();
-    alert("Form submitted!");
-    console.log("Submitting form...", formData);
+    formData.image = uploadedImageUrl;
+     console.log("🚀 Submit triggered");
+
+    console.log("formData just before validation:", formData);
+    console.log("Is form valid?", isFormValid());
+
+
+  if (!isFormValid()) {
+    toast({
+      title: "Please fill in all required fields.",
+      variant: "destructive",
+    });
+    return; // 💥 STOP here if form is invalid
+  }
+
+  // alert("Form submitted!");
+  console.log("Submitting form...", formData);
 
     currentEditedId !== null
       ? dispatch(
@@ -59,6 +72,7 @@ function AdminProducts() {
           })
         ).then((data) => {
           console.log(data, "edit");
+          
 
           if (data?.payload?.success) {
             dispatch(fetchAllProducts());
@@ -74,6 +88,7 @@ function AdminProducts() {
           })
         ).then((data) => {
           console.log("uploadedImageUrl", uploadedImageUrl);
+          console.log("SERVER RESPONSE:", data);
           if (data?.payload?.success) {
             dispatch(fetchAllProducts());
             setOpenCreateProductsDialog(false);
@@ -94,12 +109,25 @@ function AdminProducts() {
     });
   }
 
+  // function isFormValid() {
+  //   return Object.keys(formData)
+  //     .filter((currentKey) => currentKey !== "averageReview")
+  //     .map((key) => formData[key] !== "")
+  //     .every((item) => item);
+  // }
+
   function isFormValid() {
-    return Object.keys(formData)
-      .filter((currentKey) => currentKey !== "averageReview")
-      .map((key) => formData[key] !== "")
-      .every((item) => item);
-  }
+  return Object.keys(formData)
+    .filter((key) => key !== "averageReview" && key !== "image")
+    .every((key) => {
+      const value = formData[key];
+      console.log("Validating key:", key, "| Value:", value); // 👀
+      if (typeof value === "string") return value.trim() !== "";
+      return value !== null && value !== undefined;
+    });
+}
+
+  
 
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -159,7 +187,7 @@ function AdminProducts() {
               buttonText={currentEditedId !== null ? "Edit" : "Add"}
               formControls={addProductFormElements}
               // have to check and change in future
-              isBtnDisabled={false}
+              isBtnDisabled={ !isFormValid()}
             />
           </div>
         </SheetContent>

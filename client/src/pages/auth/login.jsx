@@ -321,16 +321,17 @@ function AuthLogin() {
   };
 
   return (
-    <div className="flex min-h-screen w-full">
+    <div className="flex   min-h-screen w-full">
+    
       {/* Left Marvel Comic Side */}
-      <div className="w-1/2 bg-black text-white flex flex-col top-1 left-1 items-start p-6 space-x-2">
+      <div className="w-1/2  bg-black text-white flex flex-col top-1 left-1 items-start p-6 space-x-2">
         <img src={logo} alt="SuperStyles Logo" className="h-20 w-20 mb-2" />
         <span className="text-3xl font-comic text-yellow-300 drop-shadow-md">
           SuperStyles
         </span>
-        <p className="text-xl text-center font-bold text-white drop-shadow">
+        {/* <p className="text-xl text-center font-bold text-white drop-shadow">
           Style like a superhero 💥
-        </p>
+        </p> */}
         <img
           src={superheroGif}
           alt="Animated Superhero"
@@ -340,14 +341,15 @@ function AuthLogin() {
 
       {/* Right Auth Side */}
       <div
-        className="w-1/2 flex justify-center items-center"
+        className="w-1/2 flex justify-center items-center "
         style={{
           backgroundImage: `url(${starryNight})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className="w-full max-w-md p-6 bg-slate-50 rounded shadow-md">
+        
+        <div className="w-full max-w-md  p-6 bg-slate-50 rounded shadow-md">
           <div className="text-center mb-6">
             <h1 className="text-2xl font-semibold">
               {isLogin ? "Sign in to your account" : "Create a new account"}
@@ -382,11 +384,12 @@ function AuthLogin() {
     console.log("Login Failed");
   }}
 />
+</div>
 
-          </div>
+        </div>
         </div>
       </div>
-    </div>
+    
   );
 }
 

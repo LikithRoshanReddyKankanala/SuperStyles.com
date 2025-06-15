@@ -28,7 +28,7 @@ function AuthLayout() {
       {/* Left Comic Superhero Panel */}
       <div className="auth-left">
         <div className="max-w-md space-y-3 text-center">
-          <h1 className="auth-heading">Welcome to SuperStyles Shopping</h1>
+          <h1 className="auth-heading"></h1>
         </div>
       </div>
 

@@ -66,16 +66,16 @@ export const addProductFormElements = [
     ],
   },
   {
-    label: "Brand",
-    name: "brand",
+    label: "Theme",
+    name: "theme",
     componentType: "select",
     options: [
-      { id: "nike", label: "Marvel" },
+      { id: "Marvel", label: "Marvel" },
       { id: "DC Comic", label: "DC Comics" },
-      { id: "puma", label: "Anime" },
-      { id: "levi", label: "Fantasy" },
-      { id: "zara", label: "Cartoon" },
-      { id: "h&m", label: "Custom Fan Art" },
+      { id: "Anime", label: "Anime" },
+      { id: "Fantasy", label: "Fantasy" },
+      { id: "Cartoon", label: "Cartoon" },
+      { id: "Custom Fan Art", label: "Custom Fan Art" },
     ],
   },
   {
@@ -84,6 +84,7 @@ export const addProductFormElements = [
     componentType: "input",
     type: "number",
     placeholder: "Enter product price",
+    // required: true,
   },
   {
     label: "Sale Price",
@@ -163,11 +164,16 @@ export const brandOptionsMap = {
 
 export const filterOptions = {
   category: [
-    { id: "men", label: "Men" },
-    { id: "women", label: "Women" },
-    { id: "kids", label: "Kids" },
-    { id: "accessories", label: "Accessories" },
-    { id: "footwear", label: "Footwear" },
+    { id: "Oversized", label: "MenOversized" },
+    { id: "Acid Wash", label: "Acid Washn" },
+    { id: "Graphic printed", label: "Graphic printed" },
+    { id: "Soild Colors", label: "Soild Colors" },
+    { id: "Polo T-Shirts", label: "Polo T-Shirts" },
+    { id: "Sleeveless", label: "Sleeveless" },
+    { id: "Long Sleeve", label: "Long Sleeve" },
+    { id: "Henley", label: "Henley" },
+    { id: "Hooded", label: "Hooded" },
+    { id: "CropTops", label: "Crop Tops" },
   ],
   Size: [
     { id: "extra-small", label: "XS" },
@@ -176,13 +182,13 @@ export const filterOptions = {
     { id: "Large", label: "L" },
     { id: "extra-Large", label: "XL" },
   ],
-  brand: [
-     { id: "nike", label: "Marvel" },
-     { id: "DC Comics", label: "DC" },
-     { id: "puma", label: "Anime" },
-     { id: "Levi", label: "Fantasy" },
-     { id: "zara", label: "Cartoon" },
-     { id: "h&m", label: "Custom Fan Art" },
+  Theme: [
+     { id: "Marvel", label: "Marvel" },
+     { id: "DC Comics", label: "DC Comics" },
+     { id: "Anime", label: "Anime" },
+     { id: "Fantasy", label: "Fantasy" },
+     { id: "Cartoon", label: "Cartoon" },
+     { id: "Custom Fan Art", label: "Custom Fan Art" },
   ],
 };
 
@@ -191,6 +197,7 @@ export const sortOptions = [
   { id: "price-hightolow", label: "Price: High to Low" },
   { id: "title-atoz", label: "Title: A to Z" },
   { id: "title-ztoa", label: "Title: Z to A" },
+  { id: "Popularity", label: "Popularity" },
 ];
 
 export const addressFormControls = [

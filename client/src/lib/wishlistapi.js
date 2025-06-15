@@ -20,7 +20,7 @@ export const addWishlistItem = async ({ userId, productId }) => {
 // ✅ Remove item from wishlist
 export const removeWishlistItem = async ({ userId, productId }) => {
   const res = await axios.delete(API_BASE_URL, {
-    data: { userId, productId },
+    data: { userId, productid },
   });
   return res.data;
 };
