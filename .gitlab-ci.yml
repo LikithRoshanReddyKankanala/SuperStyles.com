@@ -1,0 +1,93 @@
+# Final .gitlab-ci.yml for SuperStyles MERN Stack (React + Node + MongoDB + Cloudinary + PayPal)
+
+stages:
+  - install
+  - build
+  - test
+  - deploy
+
+variables:
+  NODE_ENV: "production"
+  # This will be injected from GitLab CI/CD → Variables
+  MONGODB_URI: "$MONGODB_URI"
+  CLOUDINARY_CLOUD: "$CLOUDINARY_CLOUD"
+  CLOUDINARY_KEY: "$CLOUDINARY_KEY"
+  CLOUDINARY_SECRET: "$CLOUDINARY_SECRET"
+  PAYPAL_CLIENT_ID: "$PAYPAL_CLIENT_ID"
+  PAYPAL_SECRET: "$PAYPAL_SECRET"
+
+cache:
+  paths:
+    - node_modules/
+
+# Install Dependencies
+install_dependencies:
+  stage: install
+  image: node:18
+  script:
+    - cd frontend
+    - npm install
+    - cd ../backend
+    - npm install
+  artifacts:
+    paths:
+      - frontend/node_modules/
+      - backend/node_modules/
+    expire_in: 1 week
+
+# Build React Frontend
+build_frontend:
+  stage: build
+  image: node:18
+  script:
+    - cd frontend
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - frontend/build
+    expire_in: 1 week
+  only:
+    - main
+
+# Run Backend Tests
+# (Skip if you do not have tests yet)
+test_backend:
+  stage: test
+  image: node:18
+  script:
+    - cd backend
+    - npm install
+    - npm test || echo "No backend tests configured"
+  only:
+    - main
+
+# Deploy to VPS using SSH + Rsync
+# Will work only when you add SSH_PRIVATE_KEY, SERVER_IP, SERVER_USER in GitLab CI/CD variables
+
+deploy_production:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - echo "Deploying SuperStyles MERN App to VPS..."
+    - apk add openssh-client rsync
+
+    # Start SSH agent
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '
+' | ssh-add -
+
+    # Copy Frontend Build
+    - rsync -avz --delete ./frontend/build/ $SERVER_USER@$SERVER_IP:/var/www/superstyles-frontend
+
+    # Copy Backend
+    - rsync -avz --delete --exclude "node_modules" ./backend/ $SERVER_USER@$SERVER_IP:/var/www/superstyles-backend
+
+    # Restart backend using PM2
+    - ssh $SERVER_USER@$SERVER_IP "cd /var/www/superstyles-backend && pm2 restart all || pm2 start server.js --name superstyles"
+
+  environment:
+    name: production
+    url: https://yourdomain.com
+  only:
+    - main
