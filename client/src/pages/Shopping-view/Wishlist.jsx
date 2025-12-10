@@ -130,6 +130,7 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { X } from "lucide-react"; // ✖️ icon
+import Header from "@/components/Shopping-view/Header";
 
 function WishlistPage() {
   const dispatch = useDispatch();
@@ -200,8 +201,9 @@ function WishlistPage() {
 
   return (
     <div className="container mx-auto md:px-6 px-4 py-8">
+      < Header />
       {/* ✅ Header */}
-      <header className="mb-8 border-b pb-4">
+      <header className="mb-8 w-full ">
         <h1 className="text-3xl font-bold text-primary">Your Wishlist</h1>
       </header>
 

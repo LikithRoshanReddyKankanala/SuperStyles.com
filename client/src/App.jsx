@@ -26,6 +26,7 @@ import SearchProducts from "./pages/shopping-view/search";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ProfilePage from "./pages/shopping-view/Profile-Page";
 import WishlistPage from "./pages/Shopping-view/Wishlist";
+import Footer from "./components/Shopping-view/Footer";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useSelector(
@@ -109,7 +110,11 @@ function App() {
 
         </Routes>
       </div>
+      <Footer />
+
     </GoogleOAuthProvider>
+    
+
   );
 }
 
